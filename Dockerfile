@@ -7,6 +7,7 @@ RUN apk add --no-cache --virtual .build-deps \
 WORKDIR /home/app
 COPY pyproject.toml poetry.lock ./
 RUN pip install poetry
+RUN pip install python-multipart
 RUN poetry config virtualenvs.create false
 RUN poetry install -n --no-ansi
 COPY . .
