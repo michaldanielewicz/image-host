@@ -10,16 +10,26 @@ services:
       - app_db
 
   app_db:
-    image: postgres:13-alpine
+    image: postgres
     ports:
       - "5432:5432"
     restart: always
+    expose:
+      - 5432
     environment:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     volumes:
       - postgres_data:/var/lib/postgresql/data
+
+  adminer:
+    image: adminer
+    restart: always
+    depends_on:
+      - app_db
+    ports:
+      - "8080:8080"
 
 volumes:
   postgres_data:
