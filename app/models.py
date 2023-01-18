@@ -1,9 +1,12 @@
-from pydantic import BaseModel
+from sqlalchemy import Column, String, Integer
+from app.database import Base
 
 
-class ImageModel(BaseModel):
-    id: str
-    url: str
-    title: str
-    width: str
-    height: str
+class Image(Base):
+    __tablename__ = "images"
+
+    id = Column(Integer, primary_key=True, index=True)
+    url = Column(String, unique=True, index=True, nullable=False)
+    title = Column(String, nullable=False)
+    width = Column(Integer, nullable=False)
+    height = Column(Integer, nullable=False)
