@@ -3,11 +3,14 @@ version: '3.8'
 services:
   app:
     build: .
+    container_name: fastapi_app
     ports:
       - "3030:3030"
     command: bash -c "uvicorn --host 0.0.0.0 --port 3030 app.main:app --reload"
     depends_on:
       - app_db
+    volumes:
+      - image_data:/home/app/image_data
 
   app_db:
     image: postgres
@@ -33,3 +36,4 @@ services:
 
 volumes:
   postgres_data:
+  image_data:

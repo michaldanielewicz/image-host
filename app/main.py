@@ -23,7 +23,8 @@ def post_image(file: UploadFile, image_title: str, image_width: int, image_heigh
     # i dunno if i need to save it first but suppose it works like this
 
     file_extension = file.filename.split(".")[1]
-    path = image_title + "." + file_extension
+    # path = image_title + "." + file_extension
+    path = "image_data/" + image_title + "." + file_extension
     with open(path, "wb+") as file_object:
         shutil.copyfileobj(file.file, file_object)
 
