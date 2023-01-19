@@ -15,4 +15,4 @@ def store_image(file: UploadFile, path: str, image_width: int, image_height: int
 
     with Image.open(path) as image_to_resize:
         resized_image = image_to_resize.resize((image_width, image_height))
-        resized_image.save(path)
+        resized_image.save(path, optimize=True)
