@@ -25,7 +25,10 @@ async def post_image(
         raise HTTPException(status_code=415, detail="Content type not allowed. Only images supported.")
 
     content = await file.read()
-    path = create_path(image_title, file.filename)
+    try:
+        path = create_path(image_title, file.filename)
+    except FileExistsError:
+        raise HTTPException(status_code=400, detail="File with given title exists.")
     save_resized_image(content, image_width, image_height, path)
 
     image = ImageCreate(url=path, title=image_title, width=image_width, height=image_height)

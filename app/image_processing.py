@@ -6,7 +6,10 @@ from PIL import Image
 
 def create_path(image_title: str, filename: str) -> str:
     _, file_extension = os.path.splitext(filename)
-    return f"image_data/{image_title}{file_extension}"
+    path = f"image_data/{image_title}{file_extension}"
+    if os.path.exists(path):
+        raise FileExistsError
+    return path
 
 
 def save_resized_image(content: bytes, image_width: int, image_height: int, path: str) -> None:
