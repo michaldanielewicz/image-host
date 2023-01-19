@@ -101,6 +101,34 @@ doc = ["mdx-include (>=1.4.1,<2.0.0)", "mkdocs-markdownextradata-plugin (>=0.1.7
 test = ["anyio[trio] (>=3.2.1,<4.0.0)", "black (==22.10.0)", "coverage[toml] (>=6.5.0,<8.0)", "databases[sqlite] (>=0.3.2,<0.7.0)", "email-validator (>=1.1.1,<2.0.0)", "flask (>=1.1.2,<3.0.0)", "httpx (>=0.23.0,<0.24.0)", "isort (>=5.0.6,<6.0.0)", "mypy (==0.982)", "orjson (>=3.2.1,<4.0.0)", "passlib[bcrypt] (>=1.7.2,<2.0.0)", "peewee (>=3.13.3,<4.0.0)", "pytest (>=7.1.3,<8.0.0)", "python-jose[cryptography] (>=3.3.0,<4.0.0)", "python-multipart (>=0.0.5,<0.0.6)", "pyyaml (>=5.3.1,<7.0.0)", "ruff (==0.0.138)", "sqlalchemy (>=1.3.18,<1.4.43)", "types-orjson (==3.6.2)", "types-ujson (==5.6.0.0)", "ujson (>=4.0.1,!=4.0.2,!=4.1.0,!=4.2.0,!=4.3.0,!=5.0.0,!=5.1.0,<6.0.0)"]
 
 [[package]]
+name = "fastapi-pagination"
+version = "0.11.2"
+description = "FastAPI pagination"
+category = "main"
+optional = false
+python-versions = ">=3.8,<4.0"
+
+[package.dependencies]
+fastapi = ">=0.80.0"
+pydantic = ">=1.9.1"
+
+[package.extras]
+sqlalchemy = ["SQLAlchemy (>=1.3.20)", "sqlakeyset (>=1.0.1659142803,<2.0.0)"]
+asyncpg = ["SQLAlchemy (>=1.3.20)", "asyncpg (>=0.24.0)"]
+all = ["SQLAlchemy (>=1.3.20)", "databases (>=0.6.0)", "orm (>=0.3.1)", "tortoise-orm (>=0.16.18,<0.20.0)", "asyncpg (>=0.24.0)", "ormar (>=0.11.2)", "django (<5.0.0)", "piccolo (>=0.89,<0.106)", "motor (>=2.5.1,<4.0.0)", "mongoengine (>=0.23.1,<0.26.0)", "sqlmodel (>=0.0.8,<0.0.9)", "pony (>=0.7.16,<0.8.0)", "beanie (>=1.11.9,<2.0.0)", "sqlakeyset (>=1.0.1659142803,<2.0.0)", "scylla-driver (>=3.25.6,<4.0.0)"]
+databases = ["databases (>=0.6.0)"]
+orm = ["databases (>=0.6.0)", "orm (>=0.3.1)"]
+django = ["databases (>=0.6.0)", "django (<5.0.0)"]
+tortoise = ["tortoise-orm (>=0.16.18,<0.20.0)"]
+ormar = ["ormar (>=0.11.2)"]
+piccolo = ["piccolo (>=0.89,<0.106)"]
+motor = ["motor (>=2.5.1,<4.0.0)"]
+mongoengine = ["mongoengine (>=0.23.1,<0.26.0)"]
+sqlmodel = ["sqlmodel (>=0.0.8,<0.0.9)", "sqlakeyset (>=1.0.1659142803,<2.0.0)"]
+beanie = ["beanie (>=1.11.9,<2.0.0)"]
+scylla-driver = ["scylla-driver (>=3.25.6,<4.0.0)"]
+
+[[package]]
 name = "flake8"
 version = "6.0.0"
 description = "the modular source code checker: pep8 pyflakes and co"
@@ -310,6 +338,25 @@ tomli = {version = ">=1.0.0", markers = "python_version < \"3.11\""}
 testing = ["argcomplete", "hypothesis (>=3.56)", "mock", "nose", "pygments (>=2.7.2)", "requests", "xmlschema"]
 
 [[package]]
+name = "python-multipart"
+version = "0.0.5"
+description = "A streaming multipart parser for Python"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+six = ">=1.4.0"
+
+[[package]]
+name = "six"
+version = "1.16.0"
+description = "Python 2 and 3 compatibility utilities"
+category = "main"
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*"
+
+[[package]]
 name = "sniffio"
 version = "1.3.0"
 description = "Sniff out which async library your code is running under"
@@ -397,7 +444,7 @@ standard = ["colorama (>=0.4)", "httptools (>=0.5.0)", "python-dotenv (>=0.13)",
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "8d62e5879ff8f6c48ef472e735f8f4ed2fbe46a1a4ffe66b1747b34bbe2b93b7"
+content-hash = "c0f6f7621d1867b2002f58d857592ab9e173c95a4d1f241e6f5ea992fa95936d"
 
 [metadata.files]
 anyio = [
@@ -437,6 +484,10 @@ exceptiongroup = [
 fastapi = [
     {file = "fastapi-0.89.1-py3-none-any.whl", hash = "sha256:f9773ea22290635b2f48b4275b2bf69a8fa721fda2e38228bed47139839dc877"},
     {file = "fastapi-0.89.1.tar.gz", hash = "sha256:15d9271ee52b572a015ca2ae5c72e1ce4241dd8532a534ad4f7ec70c376a580f"},
+]
+fastapi-pagination = [
+    {file = "fastapi_pagination-0.11.2-py3-none-any.whl", hash = "sha256:db4bde1c055a85e3840faa70b2a63d27e45542c0ebd97cba8ca786850bb48c6d"},
+    {file = "fastapi_pagination-0.11.2.tar.gz", hash = "sha256:55ecf04131c22c9ee9b9c060d42b1555fba1188aa60fac826a9e475bb9246e83"},
 ]
 flake8 = [
     {file = "flake8-6.0.0-py2.py3-none-any.whl", hash = "sha256:3833794e27ff64ea4e9cf5d410082a8b97ff1a06c16aa3d2027339cd0f1195c7"},
@@ -719,6 +770,13 @@ pyflakes = [
 pytest = [
     {file = "pytest-7.2.1-py3-none-any.whl", hash = "sha256:c7c6ca206e93355074ae32f7403e8ea12163b1163c976fee7d4d84027c162be5"},
     {file = "pytest-7.2.1.tar.gz", hash = "sha256:d45e0952f3727241918b8fd0f376f5ff6b301cc0777c6f9a556935c92d8a7d42"},
+]
+python-multipart = [
+    {file = "python-multipart-0.0.5.tar.gz", hash = "sha256:f7bb5f611fc600d15fa47b3974c8aa16e93724513b49b5f95c81e6624c83fa43"},
+]
+six = [
+    {file = "six-1.16.0-py2.py3-none-any.whl", hash = "sha256:8abb2f1d86890a2dfb989f9a77cfcfd3e47c2a354b01111771326f8aa26e0254"},
+    {file = "six-1.16.0.tar.gz", hash = "sha256:1e61c37477a1626458e36f7b1d82aa5c9b094fa4802892072e49de9c60c4c926"},
 ]
 sniffio = [
     {file = "sniffio-1.3.0-py3-none-any.whl", hash = "sha256:eecefdce1e5bbfb7ad2eeaabf7c1eeb404d7757c379bd1f7e5cce9d8bf425384"},
