@@ -2,15 +2,13 @@ from fastapi import FastAPI, Response, UploadFile, HTTPException, Depends
 from fastapi.responses import FileResponse
 from sqlalchemy.orm import Session
 
-from app.const import ALLOWED_CONTENT_TYPES
 from app.schemas import ImageCreate
 from . import crud, models, schemas
+from .config import config
 from .database import engine, get_db
 from .image_processing import create_path, store_file, resize_image
-import logging
 
 
-logging.basicConfig(level=logging.INFO)
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
@@ -21,7 +19,7 @@ def post_image(
     file: UploadFile, image_title: str, image_width: int, image_height: int, db: Session = Depends(get_db)
 ) -> Response:
 
-    if file.content_type not in ALLOWED_CONTENT_TYPES:
+    if file.content_type not in config.ALLOWED_CONTENT_TYPES:
         raise HTTPException(status_code=400, detail="Content type not allowed. Only images supported.")
 
     path = create_path(image_title, file.filename)
