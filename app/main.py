@@ -6,7 +6,7 @@ from app.const import ALLOWED_CONTENT_TYPES
 from app.schemas import ImageCreate
 from . import crud, models, schemas
 from .database import engine, get_db
-from .image_processing import find_path, store_image
+from .image_processing import create_path, store_file, resize_image
 import logging
 
 
@@ -24,8 +24,9 @@ def post_image(
     if file.content_type not in ALLOWED_CONTENT_TYPES:
         raise HTTPException(status_code=400, detail="Content type not allowed. Only images supported.")
 
-    path = find_path(image_title, file.filename)
-    store_image(file, path, image_width, image_height)
+    path = create_path(image_title, file.filename)
+    store_file(file, path)
+    resize_image(path, image_width, image_height)
 
     image = ImageCreate(url=path, title=image_title, width=image_width, height=image_height)
     return crud.create_image(db=db, image=image)
