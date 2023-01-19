@@ -7,11 +7,13 @@ from . import crud, models, schemas
 from .config import config
 from .database import engine, get_db
 from .image_processing import create_path, store_file, resize_image
+from fastapi_pagination import Page, add_pagination, paginate
 
 
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
+add_pagination(app)
 
 
 @app.post("/images", response_model=schemas.Image)
@@ -30,9 +32,11 @@ def post_image(
     return crud.create_image(db=db, image=image)
 
 
-@app.get("/images", response_model=list[schemas.Image])
-def get_images(db: Session = Depends(get_db)) -> Response:
-    return crud.get_all_images(db=db)
+@app.get("/images", response_model=Page[schemas.Image])
+def get_images(db: Session = Depends(get_db), image_title: str = None) -> Response:
+    if image_title:
+        return paginate(crud.get_all_images_by_title(db, image_title))
+    return paginate(crud.get_all_images(db=db))
 
 
 @app.get("/images/{image_id}")
