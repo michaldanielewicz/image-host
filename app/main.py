@@ -22,7 +22,7 @@ async def post_image(
 ) -> Response:
 
     if file.content_type not in config.ALLOWED_CONTENT_TYPES:
-        raise HTTPException(status_code=400, detail="Content type not allowed. Only images supported.")
+        raise HTTPException(status_code=415, detail="Content type not allowed. Only images supported.")
 
     content = await file.read()
     path = create_path(image_title, file.filename)
