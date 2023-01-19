@@ -6,7 +6,7 @@ from app.schemas import ImageCreate
 from . import crud, models, schemas
 from .config import config
 from .database import engine, get_db
-from .image_processing import create_path, store_file, resize_image
+from .image_processing import create_path, save_resized_image
 from fastapi_pagination import Page, add_pagination, paginate
 
 
@@ -17,16 +17,16 @@ add_pagination(app)
 
 
 @app.post("/images", response_model=schemas.Image)
-def post_image(
+async def post_image(
     file: UploadFile, image_title: str, image_width: int, image_height: int, db: Session = Depends(get_db)
 ) -> Response:
 
     if file.content_type not in config.ALLOWED_CONTENT_TYPES:
         raise HTTPException(status_code=400, detail="Content type not allowed. Only images supported.")
 
+    content = await file.read()
     path = create_path(image_title, file.filename)
-    store_file(file, path)
-    resize_image(path, image_width, image_height)
+    save_resized_image(content, image_width, image_height, path)
 
     image = ImageCreate(url=path, title=image_title, width=image_width, height=image_height)
     return crud.create_image(db=db, image=image)
