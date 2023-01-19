@@ -9,7 +9,7 @@ def get_image(db: Session, image_id: int) -> Union[models.Image, None]:
     return db.query(models.Image).filter(models.Image.id == image_id).first()
 
 
-def get_all_images(db: Session):
+def get_all_images(db: Session) -> Union[list[models.Image], None]:
     return db.query(models.Image).all()
 
 
