@@ -72,6 +72,10 @@ Fetch a specific image (by id) by making a GET request to `http://0.0.0.0:8000/i
 
 You can enter the container with app by typing `make bash`
 
+### Not implemented yet
+
+* Tests for endpoints and crud operations undergoing in draft merge request [here](https://github.com/michaldanielewicz/image-host/pull/1).
+
 ### Tests
 
 To run tests:
