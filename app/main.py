@@ -1,6 +1,9 @@
+from typing import Union
+
 from fastapi import Depends, FastAPI, HTTPException, Response, UploadFile
 from fastapi.responses import FileResponse
 from fastapi_pagination import Page, add_pagination, paginate
+from fastapi_pagination.bases import AbstractPage
 from sqlalchemy.orm import Session
 
 from app.schemas import ImageCreate
@@ -20,6 +23,7 @@ add_pagination(app)
 async def post_image(
     file: UploadFile, image_title: str, image_width: int, image_height: int, db: Session = Depends(get_db)
 ) -> Response:
+    """Post an image with desired (unique) title. Resize it to given width and height."""
 
     if file.content_type not in config.ALLOWED_CONTENT_TYPES:
         raise HTTPException(status_code=415, detail="Content type not allowed. Only images supported.")
@@ -36,14 +40,16 @@ async def post_image(
 
 
 @app.get("/images", response_model=Page[schemas.Image])
-def get_images(db: Session = Depends(get_db), image_title: str = None) -> Response:
+def get_images(db: Session = Depends(get_db), image_title: Union[str, None] = None) -> AbstractPage[schemas.Image]:
+    """Get all images stored in database or filter by providing image_title."""
     if image_title:
         return paginate(crud.get_all_images_by_title(db, image_title))
     return paginate(crud.get_all_images(db=db))
 
 
-@app.get("/images/{image_id}")
+@app.get("/images/{image_id}", response_class=FileResponse)
 def get_image_by_id(image_id: int, db: Session = Depends(get_db)) -> FileResponse:
+    """Get desired image by its unique ID."""
     db_image = crud.get_image(db, image_id=image_id)
     if db_image is None:
         raise HTTPException(status_code=404, detail="Image not found")
