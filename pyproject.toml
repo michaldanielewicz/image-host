@@ -13,6 +13,7 @@ Pillow = "^9.4.0"
 SQLAlchemy = "^1.4.46"
 python-multipart = "^0.0.5"
 fastapi-pagination = "^0.11.2"
+httpx = "^0.23.3"
 
 [tool.poetry.dev-dependencies]
 black = "^22.12.0"
