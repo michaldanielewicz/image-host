@@ -1,14 +1,14 @@
-from fastapi import FastAPI, Response, UploadFile, HTTPException, Depends
+from fastapi import Depends, FastAPI, HTTPException, Response, UploadFile
 from fastapi.responses import FileResponse
+from fastapi_pagination import Page, add_pagination, paginate
 from sqlalchemy.orm import Session
 
 from app.schemas import ImageCreate
+
 from . import crud, models, schemas
 from .config import config
 from .database import engine, get_db
 from .image_processing import create_path, save_resized_image
-from fastapi_pagination import Page, add_pagination, paginate
-
 
 models.Base.metadata.create_all(bind=engine)
 
