@@ -68,6 +68,10 @@ Fetch a specific image (by id) by making a GET request to `http://0.0.0.0:8000/i
     GET /images: Fetch all images
     GET /images/{image_id}: Fetch a specific image by ID
 
+### Dev
+
+You can enter the container with app by typing `make bash`
+
 ### Tests
 
 To run tests:
