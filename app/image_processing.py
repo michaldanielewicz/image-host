@@ -3,8 +3,10 @@ import os
 
 from PIL import Image
 
+from app.config import config
 
-def create_path(image_title: str, filename: str, directory: str) -> str:
+
+def create_path(image_title: str, filename: str, directory: str = config.IMAGE_STORAGE) -> str:
     _, file_extension = os.path.splitext(filename)
     path = f"{directory}/{image_title}{file_extension}"
     if os.path.exists(path):

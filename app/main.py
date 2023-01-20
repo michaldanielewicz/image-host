@@ -26,7 +26,7 @@ async def post_image(
 
     content = await file.read()
     try:
-        path = create_path(image_title, file.filename, config.IMAGE_STORAGE)
+        path = create_path(image_title, file.filename)
     except FileExistsError:
         raise HTTPException(status_code=400, detail="File with given title exists.")
     save_resized_image(content, image_width, image_height, path)
