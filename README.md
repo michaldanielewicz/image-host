@@ -51,22 +51,25 @@ This API allows users to upload images and host them on local file storage with 
 
 ### Usage
 
-Upload an image by making a POST request to `http://0.0.0.0:8000/images` with the following form data:
+Available endpoints:
+
+    POST /images: Upload an image
+    GET /images: Fetch all images
+    GET /images/{image_id}: Fetch a specific image by ID
+
+Upload an image by making a POST request to `http://0.0.0.0:3030/images` with the following form data:
 
     file: the image file to be uploaded
     image_title: the title of the image
     image_width: the width of the image
     image_height: the height of the image
 
-Fetch all images by making a GET request to `http://0.0.0.0:8000/images`
+Fetch all images by making a GET request to `http://0.0.0.0:3030/images`
 
-Fetch a specific image (by id) by making a GET request to `http://0.0.0.0:8000/images/<image_id>`
+Fetch a specific image (by id) by making a GET request to `http://0.0.0.0:3030/images/<image_id>`
 
-### API Endpoints
+You can recall all the available endpoints and documentation at http://0.0.0.0:3030/redoc or http://0.0.0.0:3030/redoc.
 
-    POST /images: Upload an image
-    GET /images: Fetch all images
-    GET /images/{image_id}: Fetch a specific image by ID
 
 ### Dev
 
